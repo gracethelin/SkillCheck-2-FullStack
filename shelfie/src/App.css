@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.Header{
+  font-size: 30px;
+  height: 10vh;
+  width: 100vw;
+  background-color: rgb(167, 14, 0);
+  text-align: left;
+  
+}
+
+.Box{
+
+  background-color: rgb(66, 139, 141);
+  width: 500px;
+  line-height: 100px;
+  margin-left: 900px;
+  font-size: 20px;
+}
+
+button{
+  background-color: rgb(240, 75, 110);
+  border: none;
+ margin: 45px;
+ font-size: 20px;
+}
+

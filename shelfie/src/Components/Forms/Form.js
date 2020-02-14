@@ -7,7 +7,7 @@ class Form extends Component{
 
     this.state={
         productName:'',
-        productPrice: 0,
+        productPrice: '',
         imgUrl:'',
     }
   
@@ -52,9 +52,9 @@ class Form extends Component{
     handleCancel = (event) => {
         event.preventDefault();
         this.setState({
-            productName: '',
-            productPrice: '',
-            imgurl: ''
+            productName:'',
+        productPrice: '',
+        imgUrl:'',
         })
     }
     
@@ -86,7 +86,7 @@ class Form extends Component{
             <button onClick={() => this.props.saveProduct(this.state.productName)} 
             >Add To Inventory
             </button>
-            <button onClick= {this.handleCancel} >Cancel</button>
+            <button onClick= {() =>this.handleCancel} >Cancel</button>
             
         </div>
         

@@ -46,12 +46,12 @@ class App extends Component{
 
   }
 
-  saveProduct = (product_name, product_price) => [
+  saveProduct = (product_name, product_price) => {
       axios.post('/api/inventory', {product_name}, {product_price}).then(res => {
           this.setState({
           })
       }).catch((error) => console.log(error))
-  ]
+    }
      
   
   render(){

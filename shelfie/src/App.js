@@ -15,13 +15,11 @@ class App extends Component{
       inventory: []
     }
 
-    this.newProductName = this.newProductName.bind(this)
-    this.newProductPrice = this.newProductPrice.bind(this)
-    this.newProductImg = this.newProductImg.bind(this)
+
   }
 
   
-  newProductName(){
+  componentDidMount(){
       axios.get('/api/inventory').then(res => {
           this.setState({
               inventory: res.data
@@ -29,45 +27,40 @@ class App extends Component{
       }).catch((error) => console.log(error))
   }
 
-  newProductPrice(){
-      axios.get('/api/inventory').then(res => {
-          this.setState({
-              price: res.data
-          })
-      }).catch((error) => console.log(error))
-  }
 
-  newProductImg(){
-      axios.get('/api/inventory').then(res => {
+  saveProduct = (productName, productPrice, imgUrl) => {
+    console.log(productName, productPrice, imgUrl)
+      axios.post('/api/inventory', {productName, productPrice, imgUrl}).then(res => {
+        console.log('res', res)
           this.setState({
-              imgurl: res.data
+            inventory: res.data
           })
-      }).catch((error) => console.log(error))
-
-  }
-
-  saveProduct = (product_name, product_price) => {
-      axios.post('/api/inventory', {product_name}, {product_price}).then(res => {
-          this.setState({
-          })
+          return res.data
       }).catch((error) => console.log(error))
     }
      
+    deleteProduct = (id) => {
+      axios.delete(`/api/inventory/${id}`).then(res => {
+        this.setState({
+          inventory: res.data
+        })
+      })
+    }
   
   render(){
     return (
       <div className="App"> 
-      <Header />
-        <Dashboard  inventory={this.state.inventory}
+        <Header />
+        <Dashboard  
+          inventory={this.state.inventory}
+          deleteProduct={this.deleteProduct}
         />
-        <Form newProductName={this.newProductName}
-        newProductPrice={this.newProductPrice}
-        newProductImg={this.newProductImg}
-        saveProduct={this.saveProduct}
-        
+        <Form 
+          newProductName={this.newProductName}
+          newProductPrice={this.newProductPrice}
+          newProductImg={this.newProductImg}
+          saveProduct={this.saveProduct}
         />
-        <Product />
-
       </div>
     )
   }

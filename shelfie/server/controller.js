@@ -1,34 +1,33 @@
-const products = []
 
-let id = 1
+
 
 module.exports = {
 
     
-    showProducts:(req, res) => {
-        // const db = req.app.get('db');
+    showProducts: async (req, res) => {
+        const db = req.app.get('db');
 
-        // let products = await db.get_products().catch(err => res.status(500).send(err))
+         await db.get_inventory().then(products =>{
+            res.status(200).send(products)
+        }).catch(err => res.status(500).send(err))
 
-        // products.forEach((e, i) => products[i].t_date = e.t_date.toDateString())
-
-        res.status(200).send(products)
+       
     },
 
     createProduct:(req, res) => {
-        const {product_name, product_price} = req.body
-        console.log(product_price, product_name)
-            const obj = {
-                product_name: product_name,
-                product_price: product_price,
-                id: id
-            }
-            id++
-
-            products.push(obj)
-
+        console.log('hit this', res)
+        const dbInstance = req.app.get('db')
+        const {productName, productPrice, imgUrl}= req.body
+        dbInstance.add_products([productName, productPrice, imgUrl]).then((products) => {
             res.status(200).send(products)
+        }) 
+    },
 
-        // const db = req.app.get('db');
+    deleteProduct:(req, res) => {
+        const dbInstance = req.app.get('db')
+        const {id} = req.params
+        dbInstance.delete_product(id).then((products) => {
+            res.status(200).send(products)
+        })
     }
 }

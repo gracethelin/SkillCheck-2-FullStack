@@ -13,34 +13,25 @@ class Form extends Component{
   
 }
 
-    // handleChange = () => {
 
-    // }
+    productName = (event) =>{
+       this.setState({
+           productName: event.target.value
+       })
+    }
 
-    // newProductName(){
-    //     axios.get('/api/products').then(res => {
-    //         this.setState({
-    //             name: res.data
-    //         })
-    //     })
-    // }
+    productPrice = (event) =>{
+        this.setState({
+            productPrice: event.target.value
+        })
+    }
 
-    // newProductPice(){
-    //     axios.get('/api/products').then(res => {
-    //         this.setState({
-    //             price: res.data
-    //         })
-    //     })
-    // }
+    productImg = (event) =>{
+        this.setState({
+            imgUrl: event.target.value
+        })
 
-    // newProductImg(){
-    //     axios.get('/api/products').then(res => {
-    //         this.setState({
-    //             imgUrl: res.data
-    //         })
-    //     })
-
-    // }
+    }
 
     // saveProduct = (product) => [
     //     axios.post('/api/products', {product}).then(res => {
@@ -49,12 +40,11 @@ class Form extends Component{
     //     })
     // ]
 
-    handleCancel = (event) => {
-        event.preventDefault();
+    handleCancel = () => {
         this.setState({
             productName:'',
-        productPrice: '',
-        imgUrl:'',
+            productPrice: '',
+            imgUrl:'',
         })
     }
     
@@ -65,28 +55,35 @@ class Form extends Component{
             <ul>
                 <div>Product Name:</div>
             <input 
-            // value={this.state.name}
+            value={this.state.productName}
             placeholder="Enter Product Name"
-            onChange={() => this.props.newProductName(this.state.productName)}/>
+            onChange={(event) => this.productName(event)}/>
            </ul>
             <ul> 
                 <div>Product Price:</div>
             <input 
-            // value={this.state.price}
+            value={this.state.productPrice}
             placeholder="Enter Price"
-            onChange={e => this.props.newProductPrice(e.target.value)}
+            onChange={(event) => this.productPrice(event)}
             /></ul>
            <ul> 
                <div>Image URL:</div>
                <input 
-            // value={this.state.imgurl}
+            value={this.state.imgUrl}
             placeholder="Enter Image URL"
-            onChange={e => this.props.newProductImg(this.state.imgurl)}
+            onChange={(event) => this.productImg(event)}
             /></ul>
-            <button onClick={() => this.props.saveProduct(this.state.productName)} 
-            >Add To Inventory
+            <button 
+                onClick={() => this.props.saveProduct(this.state.productName, this.state.productPrice, this.state.imgUrl)}
+            >   
+                Add To Inventory
             </button>
-            <button onClick= {() =>this.handleCancel} >Cancel</button>
+
+            <button 
+                onClick= {() =>this.handleCancel()} 
+            >
+                Cancel
+            </button>
             
         </div>
         

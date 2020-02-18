@@ -7,27 +7,26 @@ class Dashboard extends Component{
     super(props)
 }
     render(){
-        console.log(this.props)
       if(this.props.inventory){
 
         const inventoryList = this.props.inventory.map(element => {
+            console.log(element)
+          
             return (
                 <Product 
                 key={element.id}
                 product_name={element.product_name}
-                id={element.id}
+                id={element.product_id}
                 product_price={element.product_price}
-                passing={this.props}
+                imgUrl={element.product_image}
                 saveProduct={this.props.saveProduct}
-                newProductImg={this.props.newProductImg}
-                newProductPrice={this.props.newProductPrice}
+                deleteProduct={this.props.deleteProduct}
                 />
             )
         })
-        console.log(inventoryList)
-     return (
-        <div>{inventoryList}</div>
-   )
+        return (
+            <div>{inventoryList}</div>
+        )
         
       }
     }

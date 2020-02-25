@@ -23,6 +23,15 @@ module.exports = {
         }) 
     },
 
+    updateProduct:(req, res) => {
+        const dbInstance = req.app.get('db')
+        const {productName, productPrice, imgUrl}= req.body
+        const {id} = req.params
+        dbInstance.update_product([productName, productPrice, imgUrl, id]).then((products) => {
+            res.status(200).send(products)
+        }).catch(err => console.log(err))
+    },
+
     deleteProduct:(req, res) => {
         const dbInstance = req.app.get('db')
         const {id} = req.params

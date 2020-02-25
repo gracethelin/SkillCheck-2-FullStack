@@ -10,7 +10,7 @@ app.use(express.json());
 app.get('/api/inventory', ctrlInventory.showProducts)
 app.post('/api/inventory', ctrlInventory.createProduct)
 app.delete('/api/inventory/:id', ctrlInventory.deleteProduct)
-
+app.put('/api/inventory/:id', ctrlInventory.updateProduct)
 
 
 massive({

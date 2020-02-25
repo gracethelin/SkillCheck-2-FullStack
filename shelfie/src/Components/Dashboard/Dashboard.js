@@ -21,6 +21,7 @@ class Dashboard extends Component{
                 imgUrl={element.product_image}
                 saveProduct={this.props.saveProduct}
                 deleteProduct={this.props.deleteProduct}
+                handleFindProduct={this.props.handleFindProduct}
                 />
             )
         })

@@ -12,19 +12,34 @@ class App extends Component{
     super(props)
 
     this.state = {
-      inventory: []
+      inventory: [],
+      selectedProduct: {}
     }
-
-
   }
+
 
   
   componentDidMount(){
-      axios.get('/api/inventory').then(res => {
-          this.setState({
-              inventory: res.data
-          })
-      }).catch((error) => console.log(error))
+    this.gettt()
+  }
+
+  gettt = () => {
+    axios.get('/api/inventory').then(res => {
+      this.setState({
+          inventory: res.data
+      })}).catch((error) => console.log(error))
+  }
+
+
+  handleFindProduct = (id) => {
+    
+    this.state.inventory.map(element => {
+      if(element.product_id === id){
+        this.setState({
+          selectedProduct: element
+        })
+      }
+    } )
   }
 
 
@@ -48,18 +63,22 @@ class App extends Component{
     }
   
   render(){
+    console.log(this.state)
     return (
       <div className="App"> 
         <Header />
         <Dashboard  
           inventory={this.state.inventory}
           deleteProduct={this.deleteProduct}
+          handleFindProduct={this.handleFindProduct}
         />
         <Form 
           newProductName={this.newProductName}
           newProductPrice={this.newProductPrice}
           newProductImg={this.newProductImg}
           saveProduct={this.saveProduct}
+          selectedProduct={this.state.selectedProduct}
+          gettt={this.gettt}
         />
       </div>
     )
